@@ -111,6 +111,7 @@ class Viaje{
      * @return string
      */
     public function mostrarPasajeros(){
+        //array $colPasajero
 
         $colPasajero= $this->get_arrayPasajeros();
 
@@ -131,6 +132,8 @@ class Viaje{
      * @return int
      */
     public function buscarPasajero($dni){
+        //array $colPasajero
+        //boolean $encontro
 
         $colPasajero=$this->get_arrayPasajeros();
         $i=0;
@@ -150,25 +153,6 @@ class Viaje{
         return $i;
     }
 
-    // ----- PRUEBA -----
-
-    public function modificarPasajero($pdni, $pnombre, $papellido,$ptelefono,$dnibuscar){
-
-        $indice = $this->buscarPasajero($dnibuscar);
-
-        if ($indice >= 0){ //Si lo encuentra
-            $colP = $this->get_arrayPasajeros();
-            $colP[$indice]->set_nombre($pnombre);
-            $colP[$indice]->set_apellido($papellido);
-            $colP[$indice]->set_documento($pdni);
-            $colP[$indice]->set_telefono($ptelefono);
-
-            $this->set_arrayPasajeros($colP);
-        }
-
-        return $indice;
-
-    }
     /**
      * para ir agregando a los pasajeros
      * @param int $pdni,$ptelefono
@@ -187,6 +171,8 @@ class Viaje{
              
     }
 
+    
+    
     //----- METODO TOSTRING -----
     public function __toString(){
 

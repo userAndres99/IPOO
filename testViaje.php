@@ -85,11 +85,19 @@ function menuPasajeros(){
 
 //TEST ViajeFeliz
 
-//int $codigoViaje,$cantidadMaxPasajeros,$i,$documentoPasajero,$opcion,$nuevoCodigo,$nuevaCantMaxPasajeros,$nuevoDocumento,$pasajerosNuevos,$cantidadMaxPasajerosAntigua
-//string $destinoViaje,$nombrePasajero,$apellidoPasajero,$nuevoDestino,$nuevoNombre,$nuevoApellido
+//int $codigoViaje,$cantidadMaxPasajeros,$i,$documentoPasajero,$opcion,$nuevoCodigo,$nuevaCantMaxPasajeros,$nuevoDocumento,$pasajerosNuevos,$cantidadMaxPasajerosAntigua,$contador,$numEmpleadoResponsable,$numLicenciaResponsable,$nuevoTelefono,$indiceDelPasajero, $telefonoPasajero
+//string $destinoViaje,$nombrePasajero,$apellidoPasajero,$nuevoDestino,$nuevoNombre,$nuevoApellido,$nombreResponsable,$apellidoResponsable
 //array $arrayPasajerosViaje
 //objeto $viaje1
 
+$telefonoPasajero=0;
+$indiceDelPasajero=0;
+$nuevoTelefono=0;        
+$numEmpleadoResponsable=0;
+$numLicenciaResponsable=0;
+$nombreResponsable="";
+$apellidoResponsable="";
+$contador=0;
 $codigoViaje = 0;
 $cantidadMaxPasajeros = 0;
 $i = 0;
@@ -235,6 +243,7 @@ do{
                     break;
                     
                     //PARA MODIFICAR LA CANTIDAD MAXIMA DE PASAJEROS
+                    //(ACA TAMBIEN AGREGO A LOS NUEVOS PASAJEROS CON LA NUEVA CANTIDAD MAX)
                     case 3:
                         
                         echo "--- La Cantidad Maxima de Pasajeros es ".$viaje1->get_cantMaximaPasajeros()." ---\n \n";
@@ -258,9 +267,11 @@ do{
                         //RESTO EL NUMERO DE LA NUEVA CANTIDAD MAX CON LA CANTIDAD MAX ANTIGUA PARA SABER CUANTOS PASAJEROS NUEVOS INGRESO
                         $pasajerosNuevos = $nuevaCantMaxPasajeros - $cantidadMaxPasajerosAntigua;
 
+                        $contador=1;
+
                         //PARA AGREGAR A LOS NUEVOS PASAJEROS
-                        for ($i = 1;$i <= $pasajerosNuevos; $i++){
-                            echo "--- Pasajero Nuevo ".$i." de ".$pasajerosNuevos."---\n \n";
+                        do{
+                            echo "--- Pasajero Nuevo ".$contador." de ".$pasajerosNuevos."---\n \n";
                             
                             echo "Ingrese el Nombre: \n";
                             $nombrePasajero=trim(fgets(STDIN));
@@ -274,9 +285,22 @@ do{
                             echo "ingrese el Telefono: \n";
                             $telefonoPasajero=trim(fgets(STDIN));
 
-                            $viaje1->agregarPasajero($nombrePasajero,$apellidoPasajero,$documentoPasajero,$telefonoPasajero);
-                           
-                        }
+                            //PARA BUSCAR QUE NO ESTE EL PASAJERO (LO BUSCA POR EL DOCUMENTO)
+                            $indiceDelPasajero=$viaje1->buscarPasajero($documentoPasajero);
+
+                            //SI RECORRIO TODO EL ARREGLO QUIERE DECIR QUE NO ENCONTRO AL PASAJERO Y LO AGREGO
+                            if($indiceDelPasajero == count($viaje1->get_arrayPasajeros())){
+
+                                $viaje1->agregarPasajero($nombrePasajero,$apellidoPasajero,$documentoPasajero,$telefonoPasajero);
+                                $contador++;
+
+                            //SINO LE DIGO QUE VUELVA A INGRESAR LOS DATOS PORQUE EL PASAJERO YA ESTA
+                            }else{
+                                echo "\n --- El pasajero ya esta Registrado porfavor ingrese de nuevo los datos ---\n";
+                            }
+                            
+
+                        }while($contador <= $pasajerosNuevos);
                         
                         //----- PARA VER SI SE CAMBIA LA CANTIDAD MAXIMA Y SE AGREGAN LOS NUEVOS PASAJEROS -----
                         echo $viaje1;
