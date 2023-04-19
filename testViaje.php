@@ -37,10 +37,11 @@ function menuPrincipal(){
     echo "2-)Ver los Datos de los Pasajeros: \n";
     echo "3-)Modificar la Informacion del Viaje:  \n";
     echo "4-)Modificar la Informacion de Pasajeros: \n";
-    echo "5-)Ingresar los Datos del Responsable \n \n";
+    echo "5-)Ingresar los Datos del Responsable \n";
+    echo "6-)Salir \n \n";
 
     
-    $opcionPrincipal=solicitarNumeroEntre(1,5);
+    $opcionPrincipal=solicitarNumeroEntre(1,6);
     return $opcionPrincipal;
 }
 //--------------------------------------------------------------------------------
@@ -55,10 +56,11 @@ function menuViaje(){
 
     echo "1) El Codigo del Viaje \n";
     echo "2) El Destino del Viaje \n";
-    echo "3) La Cantidad Maxima de Pasajeros \n \n";
+    echo "3) La Cantidad Maxima de Pasajeros \n";
+    echo "4) Volver al Menu \n \n";
 
 
-    $opcionViaje=solicitarNumeroEntre(1,3);
+    $opcionViaje=solicitarNumeroEntre(1,4);
     return $opcionViaje;
 }
 //--------------------------------------------------------------------------------
@@ -74,9 +76,10 @@ function menuPasajeros(){
     echo "1) El Nombre\n";
     echo "2) El Apellido\n";
     echo "3) Numero de Documento\n";
+    echo "4) Volver al menu \n \n";
 
     
-    $opcionPasajero=solicitarNumeroEntre(1,3);
+    $opcionPasajero=solicitarNumeroEntre(1,4);
     return $opcionPasajero;
 
 }
@@ -179,10 +182,10 @@ $viaje1->set_responsable($resposable);
 
 do{
     //MENU PRINCIPAL PARA QUE EL USUARIO DECIDA QUE HACER
-    $opcion = menuPrincipal();
+    $opcionPrincipal = menuPrincipal();
 
     // SWITCH PARA EL MENU PRINCIPAL 
-    switch($opcion){
+    switch($opcionPrincipal){
 
         //MUESTRA LOS DATOS DEL VIAJE
         case 1:
@@ -211,10 +214,10 @@ do{
             do{
                 
                 //MENU PARA MODIFICAR LOS DATOS DEL VIAJE
-                $opcion = menuViaje();
+                $opcionViaje = menuViaje();
 
                 //SWITCH PARA EL MENU DE VIAJE
-                switch($opcion){
+                switch($opcionViaje){
                     
                     //PARA MODIFICAR EL CODIGO
                     case 1:
@@ -261,6 +264,7 @@ do{
                         //MANDO LA NUEVA CANTIDAD MAXIMA DE PASAJEROS
                         $viaje1->set_cantMaximaPasajeros($nuevaCantMaxPasajeros);
 
+                        //----- CREO QUE ESTA AL PEDO -----
                         //LLAMO A LA LISTA DE PASAJEROS PARA IR AGREGANDO A LOS NUEVOS POR LA NUEVA CANTIDAD MAXIMA
                         $arrayPasajerosViaje=$viaje1->get_arrayPasajeros();
 
@@ -309,7 +313,7 @@ do{
                     
                 }
 
-            }while($opcion=!3);
+            }while($opcionViaje!=4);
 
         break;
         
@@ -333,10 +337,10 @@ do{
             do{
 
                 //MENU PARA MODIFICAR A LOS PSAJEROS
-                $opcion=menuPasajeros();
+                $opcionPasajero=menuPasajeros();
 
                 //SWITCH PARA EL MENU DE MODIFICACION DE LOS PASAJEROS
-                switch ($opcion){
+                switch ($opcionPasajero){
 
                     //PARA MODIFICAR EL NOMBRE
                     case 1:
@@ -398,7 +402,7 @@ do{
                     break;
                 }
                 
-            }while($opcion=!4);
+            }while($opcionPasajero!=4);
 
         break;
         
@@ -429,4 +433,4 @@ do{
       
     }
 
-}while ($opcion=!5);
+}while ($opcion!=6);

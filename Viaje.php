@@ -1,6 +1,5 @@
 <?php
-include_once("Pasajero.php");
-include_once("Responsablev.php");
+
 
 class Viaje{
     //REPRESENTACION DE UN VIAJE
