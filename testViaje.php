@@ -76,7 +76,8 @@ function menuPasajeros(){
     echo "1) El Nombre\n";
     echo "2) El Apellido\n";
     echo "3) Numero de Documento\n";
-    echo "4) Volver al menu \n \n";
+    echo "4) Numero de Telefono \n";
+    echo "5) Volver al menu \n \n";
 
     
     $opcionPasajero=solicitarNumeroEntre(1,4);
@@ -126,14 +127,12 @@ $viaje1= new Viaje(0,"",0,[],null);
 $codigoViaje=33;
 $destinoViaje="mi casa";
 $cantidadMaxPasajeros=3;
-/*$arrayPasajerosViaje[0]=["nombre"=>"juanito","apellido"=>"perez","documento"=>54321];
-$arrayPasajerosViaje[1]=["nombre"=>"lucas","apellido"=>"mendoza","documento"=>33333];
-$arrayPasajerosViaje[2]=["nombre"=>"paola","apellido"=>"menard","documento"=>44444];
-*/
+
 //----- CONSULTAR CUAL ES LA MEJOR OPCION -----
-$arrayPasajerosViaje=[  new Pasajero ("paco","mendoza",76543210,2998765432), 
-                        new Pasajero ("leleco","menard",77777777,2991234567), 
-                        new Pasajero ("pipoca","vidal",12345678,2993333333)];
+$arrayPasajerosViaje=[  new Pasajero ("paco","mendoza","76543210","2998765432"), 
+                        new Pasajero ("leleco","menard","77777777","2991234567"), 
+                        new Pasajero ("pipoca","vidal","12345678","2993333333")];
+
 /*                        
 $arrayPasajerosViaje[0]=[new pasajero ("paco","mendoza",76543210,2998765432)];
 $arrayPasajerosViaje[1]=[new pasajero ("leleco","menard",77777777,2991234567)];
@@ -350,7 +349,9 @@ do{
                         $nuevoNombre=trim(fgets(STDIN));
 
                         //ENVIO DE DATOS                      
-                        $viaje1->get_arrayPasajeros()[$indiceDelPasajero]->set_nombre($nuevoNombre);
+                        //$viaje1->get_arrayPasajeros()[$indiceDelPasajero]->set_nombre($nuevoNombre);
+
+                        $viaje1->modificarPasajero($arrayPasajerosViaje[$indiceDelPasajero],$opcionPasajero,$nuevoNombre);
 
                         //-----PARA VER SI SE GUARDO EL NOMBRE-----
                        echo $viaje1;
@@ -365,7 +366,9 @@ do{
                         $nuevoApellido=trim(fgets(STDIN));
 
                         //ENVIO DE DATOS
-                        $viaje1->get_arrayPasajeros()[$indiceDelPasajero]->set_apellido($nuevoApellido);
+                        //$viaje1->get_arrayPasajeros()[$indiceDelPasajero]->set_apellido($nuevoApellido);
+
+                        $viaje1->modificarPasajero($arrayPasajerosViaje[$indiceDelPasajero],$opcionPasajero,$nuevoApellido);
 
                         //-----PARA VER SI SE GUARDO EL APELLIDO-----
                         echo $viaje1;
@@ -380,7 +383,9 @@ do{
                         $nuevoDocumento=trim(fgets(STDIN));
 
                         //ENVIO DE DATOS
-                        $viaje1->get_arrayPasajeros()[$indiceDelPasajero]->set_documento($nuevoDocumento);
+                        //$viaje1->get_arrayPasajeros()[$indiceDelPasajero]->set_documento($nuevoDocumento);
+
+                        $viaje1->modificarPasajero($arrayPasajerosViaje[$indiceDelPasajero],$opcionPasajero,$nuevoDocumento);
 
                         //-----PARA VER SI SE GUARDO EL DOCUMENTO-----
                         echo $viaje1;
@@ -395,7 +400,9 @@ do{
                         $nuevoTelefono=trim(fgets(STDIN));
 
                         //ENVIO DE DATOS
-                        $viaje1->get_arrayPasajeros()[$indiceDelPasajero]->set_telefono($nuevoTelefono);
+                        //$viaje1->get_arrayPasajeros()[$indiceDelPasajero]->set_telefono($nuevoTelefono);
+
+                        $viaje1->modificarPasajero($arrayPasajerosViaje[$indiceDelPasajero],$opcionPasajero,$nuevoTelefono);
 
                         //----- PARA VER SI SE GUARDO EL TELEFONO -----
                         echo $viaje1;

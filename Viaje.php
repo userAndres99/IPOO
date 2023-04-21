@@ -109,7 +109,7 @@ class Viaje{
      * muestra la lista de pasajeros
      * @return string
      */
-    public function mostrarPasajeros(){
+    /*public function mostrarPasajeros(){
         //array $colPasajero
 
         $colPasajero= $this->get_arrayPasajeros();
@@ -125,6 +125,22 @@ class Viaje{
         }
         return $cadena; 
     }
+    */
+        public function mostrarPasajeros(){
+            //array $colPasajero
+
+            $colPasajero= $this->get_arrayPasajeros();
+
+            $cadena = "";
+            for($i=0;$i < count($this->get_arrayPasajeros()); $i++){
+        
+            $cadena=$cadena."Pasajero". $i + 1 . "\n". $colPasajero[$i] . "\n \n";
+            
+            }
+            
+            return $cadena; 
+        }
+         
     /**
      * busca un pasajero en la lista por dni
      * @param int
@@ -169,6 +185,32 @@ class Viaje{
         $this->set_arrayPasajeros($losPasajeros);
              
     }
+    /**
+     * para modificar a un pasajero
+     * @param object $objPasajero
+     * @param int $opcionModificar
+     * @param string $datoModificar
+     */
+    public function modificarPasajero($objPasajero,$opcionModificar,$datoModificar){
+
+        switch ($opcionModificar){
+            case 1:
+                $objPasajero->set_nombre($datoModificar);
+            break;
+            case 2:
+                $objPasajero->set_apellido($datoModificar);
+            break;
+            case 3:
+                $objPasajero->set_documento($datoModificar);
+            break;
+            case 4:
+                $objPasajero->set_telefono($datoModificar);
+            break;
+        }
+        
+    }
+
+    
 
     
     
